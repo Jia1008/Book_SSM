@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	<mapper namespace="com.briup.dao.IAjaxDao">
+		<select id="findPriceRankAjax" resultType="Product">
+			select p.id,p.name,price,service_fg,service_myf,service_zt,
+			service_th,version,stock,description,writer,pages,ISBN,
+			publish_date,feature_images,images,bill,start_date,sale_num,
+			flag,explain
+			from d_product p,d_category c,d_category_detail d
+			where c.id=d.category_id and d.id=p.cat_detail_id
+			and c.id=#{param1} and p.price between #{param2} and #{param3}
+		</select>
+	
+		<select id="findPublishAjax" resultType="Product">
+			select p.id,p.name,price,service_fg,service_myf,service_zt,
+			service_th,version,stock,description,writer,pages,ISBN,
+			publish_date,feature_images,images,bill,start_date,sale_num,
+			flag,explain
+			from d_product p,d_publish d,d_category c,d_category_detail cd
+			where p.publish_id=d.id and c.id=cd.category_id and p.cat_detail_id=cd.id
+			and c.id=#{param1} and d.id=#{param2}
+		</select>
+		
+		<select id="findOrderAjax" resultType="Product">
+			select p.id,p.name,price,service_fg,service_myf,service_zt,
+			service_th,version,stock,description,writer,pages,ISBN,
+			publish_date,feature_images,images,bill,start_date,sale_num,
+			flag,explain
+			from d_product p,d_category c,d_category_detail d
+			where c.id=d.category_id and d.id=p.cat_detail_id and c.id=#{param1}
+			order by ${param2} desc
+		</select>
+		
+	</mapper>

@@ -1,0 +1,40 @@
+/* CSS Document */
+table,tbody,thead,tfoot,tr,th,td{ margin:0; padding:0; border-spacing:0;}
+table{ border-collapse:collapse; display:block;}
+
+
+#shopcar_num_icon{
+	width:60px;
+	height:20px;	
+	overflow:hidden;
+	text-align:center;
+	float: left;
+	margin-top: 40px;
+	border: 1px solid #ddd;
+}
+#span111{
+	float:left;
+	width:10px;
+	border:1px solid #ddd;
+	border-right:0px;
+	height:20px;
+	text-align:center;
+	margin:0px;
+}
+#shopcar_num_icon input{
+	width:38px;
+	height:20px;
+	border:1px solid #ddd;
+	text-align:center;
+	margin:0px;
+	
+}
+#span222{
+	float:right;
+	border:1px solid #ddd;
+	height:20px;
+	width:10px;
+	text-align:center;
+	border-left:0px;
+	margin:0px;
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	<mapper namespace="com.briup.dao.IUserDao">
+		<!-- 保存用户 -->
+		<insert id="savaUser" parameterType="User">
+			<selectKey keyProperty="id" resultType="Integer" order="BEFORE"> 
+				select d_user_id.nextval from dual
+			</selectKey>
+			insert into d_user(id,name,password,zip,address,phone,email) 
+			values(#{id},#{name},#{password},#{zip},#{address},#{phone},#{email})
+		</insert>
+		<!-- 根据名字查询用户 -->
+		<select id="findUserByName" parameterType="String" resultType="User">
+			select id,name,password,zip,address,phone,email
+			from d_user
+			where name=#{_parameter}
+		</select>
+		
+		<!--修改用户信息  -->
+		<update id="updateUser" parameterType="User">
+			update d_user set password=#{password},zip=#{zip},
+			address=#{address},phone=#{phone},email=#{email}
+			where name=#{name}
+		</update>
+	</mapper>

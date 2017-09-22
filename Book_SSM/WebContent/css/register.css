@@ -1,0 +1,38 @@
+@charset "gb2312";
+/* CSS Document */
+	.content2 div{
+		float:left;
+		font-size:12px;
+		color:#fff;
+		}
+
+		}
+/*当鼠标放到文本框时，提示文本的样式*/
+.import_prompt{
+	border:solid 1px #ffcd00;
+	background-color:#ffffda;
+	padding-left:5px;
+	padding-right:5px;
+	line-height:20px;
+	}
+/*当文本框内容不符合要求时，提示文本的样式*/
+.error_prompt{
+	border:solid 1px #ff3300;
+	background-color:#fff2e5;
+	background-image:url(../images/li_err.gif);
+	background-repeat:no-repeat;
+	background-position:5px 2px;
+	padding:2px 5px 0px 25px;
+	line-height:20px;
+	}
+/*当文本框内容输入正确时，提示文本的样式*/
+.ok_prompt{
+	background-image:url(../images/li_ok.gif);
+	background-repeat:no-repeat;
+	background-position:15px 10px;
+	padding:12px 5px 0px 25px;
+	line-height:20px;
+	}
+
+
+

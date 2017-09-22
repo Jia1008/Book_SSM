@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+	<mapper namespace="com.briup.dao.IProductDao">
+		<resultMap type="com.briup.entity.IndexBottom" id="IndexBottomResult">
+			<id property="id" column="pid" /> 
+				<result property="name" column="pname" />
+				<result property="title" column="title" />
+				<result property="explain" column="explain" />
+		</resultMap>
+		
+		<resultMap type="Product" id="ProductResult">
+			<id property="id" column="id" /> 
+				<result property="name" column="name" />
+				<result property="price" column="price" />
+				<result property="service_fg" column="service_fg" />
+				<result property="service_myf" column="service_myf" />
+				<result property="service_zt" column="service_zt" />
+				<result property="service_th" column="service_th" />
+				<result property="version" column="version" />
+				<result property="stock" column="stock" />
+				<result property="description" column="description" />
+				<result property="writer" column="writer" />
+				<result property="pages" column="pages" />
+				<result property="ISBN" column="ISBN" />
+				<result property="publish_date" column="publish_date" />
+				<result property="feature_images" column="feature_images" />
+				<result property="images" column="images" />
+				<result property="bill" column="bill" />
+				<result property="start_date" column="start_date" />
+				<result property="sale_num" column="sale_num" />
+				<result property="flag" column="flag" />
+				<result property="explain" column="explain" />
+				<association property="publish" resultMap="PublishResult" />
+				<association property="cate_detail" resultMap="CategoryDetailResult" />
+		</resultMap>
+	
+		<resultMap type="Publish" id="PublishResult">
+			<id property="id" column="did" /> 
+			<result property="name" column="dname" /> 
+		</resultMap>
+	
+		<resultMap type="Category" id="CategoryResult">
+			<id property="id" column="cid" /> 
+				<result property="name" column="cname" /> 
+		</resultMap>
+		
+		<resultMap type="CategoryDetail" id="CategoryDetailResult">
+			<id property="id" column="cdid" /> 
+			<result property="name" column="cdname" />
+			<association property="category" resultMap="CategoryResult" />
+			<collection property="products" resultMap="ProductResult" />
+		</resultMap>
+	
+		<!-- 查找热卖商品 -->
+		<select id="findHotProduct" resultType="Product">
+			select id,name,price,service_fg,service_myf,service_zt,
+			service_th,version,stock,description,writer,pages,ISBN,
+			publish_date,feature_images,images,bill,start_date,sale_num,
+			flag,explain
+			from d_product
+			where flag=3 
+		</select>
+		<!--获取index页面底部的数据  -->
+		<select id="findBottomProduct" resultMap="IndexBottomResult">
+			select p.id pid,p.name pname,r.title title,p.explain explain
+			from d_product p,d_report_product rp,d_report r
+			where p.id=rp.product_id and r.id=rp.report_id
+		</select>
+		<!-- 根据大类名求对应商品 -->
+		<select id="findProductByCategoryId" parameterType="long" resultType="Product">
+			select p.id,p.name,price,service_fg,service_myf,service_zt,
+			service_th,version,stock,description,writer,pages,ISBN,
+			publish_date,feature_images,images,bill,start_date,sale_num,
+			flag,explain
+			from d_product p,d_category c,d_category_detail d
+			where c.id=d.category_id and d.id=p.cat_detail_id
+			and c.id=#{_parameter}
+		</select>
+		<!-- 根据大类名和小类id求对应商品 -->
+		<select id="findProductByCategoryIdAndDetailId" resultType="Product">
+			select p.id,p.name,price,service_fg,service_myf,service_zt,
+			service_th,version,stock,description,writer,pages,ISBN,
+			publish_date,feature_images,images,bill,start_date,sale_num,
+			flag,explain
+			from d_product p,d_category c,d_category_detail d
+			where c.id=d.category_id and d.id=p.cat_detail_id
+			and c.id=#{param1} and d.id=#{param2}
+		</select>
+		
+		<!-- 获取价格区间 -->
+		<select id="findPriceRank" resultType="PriceRank">
+			select id,min_price,max_price
+			from d_price_rank
+		</select>
+		<!--获取出版社  -->
+		<select id="findPublish" resultType="Publish">
+			select id,name
+			from d_publish
+		</select>
+		
+		<!-- 根据商品id获取商品详细信息 -->
+		<select id="findProductByID" parameterType="long" resultMap="ProductResult">
+			select c.id cid,c.name cname,cd.id cdid,cd.name cdname,d.id did,d.name dname,
+			p.id,p.name,price,service_fg,service_myf,service_zt,service_th,version,stock,
+			description,writer,pages,ISBN,publish_date,feature_images,images,bill,start_date,sale_num,
+			flag,explain
+			from d_product p,d_category_detail cd,d_category c,d_publish d
+			where p.cat_detail_id=cd.id and cd.category_id=c.id and d.id=p.publish_id
+			and p.id=#{_parameter} 
+		</select>
+	</mapper>

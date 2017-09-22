@@ -1,0 +1,57 @@
+@CHARSET "UTF-8";
+.md_title1{
+	float: left;
+	margin-left: 40px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+.md_title2{
+	float: left;
+	margin-left: 80px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+.md_title3{
+	float: left;
+	margin-left: 160px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+.md_title4{
+	float: left;
+	margin-left: 80px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+.md_text1{
+	float: left;
+	margin-left: 3px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 60px;
+}
+.md_text2{
+	float: left;
+	margin-left: 40px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 60px;
+}
+.md_text3{
+	float: left;
+	margin-left: 100px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	margin-top: 60px;
+}
